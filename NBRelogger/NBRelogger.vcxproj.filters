@@ -27,6 +27,12 @@
     <ClInclude Include="process.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="xmlReader.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="xmlParser.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
