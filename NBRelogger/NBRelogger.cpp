@@ -3,11 +3,6 @@
 
 #include "stdafx.h"
 #include "process.h"
-#include <stdio.h>
-#include <windows.h>
-#include <iostream>
-#include <stdlib.h>
-#include <stdbool.h>
 
 #define SLEEPTIME 500 //defines sleeptime in ms between each check cycle
 
@@ -25,10 +20,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	//	x++;
 	//	printf("run number %d\n", x);
 	//}
-	Process aProcess = Process(execProg);
+	Process aProcess = Process::Process();
+	aProcess.setPath(execProg);
 	aProcess.startProcess();
 	//boolean keepAlive = TRUE;
-	while (x <= 100)
+	//x <= 100
+	while (true)
 	{
 		//if (x >= 10000){
 		//	keepAlive = FALSE;
@@ -38,6 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			printf("process is dead! :'( \n");
 			aProcess.startProcess();
+			printf("PID of new Process is: %d\n", aProcess.getPID());
 		}
 		else{
 			printf("yeeeeah still alive! \n");
@@ -45,7 +43,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf("still alive at run %d\n", x);
 		Sleep(SLEEPTIME);
 		x++;
-		//cin.get();
 	}
 	system("pause");
 	

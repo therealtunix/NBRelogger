@@ -9,6 +9,11 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h>
+#include <iostream>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string>
 
 
 
