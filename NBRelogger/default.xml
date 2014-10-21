@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<launch_info>  
-  <botinfo>
+<launch_info>
+  <scheduleinfo>
     <wow_path>c:/Program Files/World of Warcraft/wow.exe</wow_path>
     <bot_path>c:/nemesis/nemesis.exe</bot_path>
     <settings_path>c:/nemesis/settings/default.xml</settings_path>
-    time mit entsprechender ID
-    ~time_1 ist erste anfangszeit time_2 ist erste endzeit
-    ~time_1 und time_2 ergeben ein paar im sinne von: von time_1 bis time_2
-    <time_1></time_1>
-    <time_2></time_2>
-  </botinfo>
+    <time_from>13:00</time_from>
+    <time_to>13:30</time_to>
+  </scheduleinfo>
  </launch_info>

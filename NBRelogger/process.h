@@ -30,4 +30,7 @@ public:
 	Process();
 	~Process();
 	void startProcess();
+
+private:
+	static BOOL CALLBACK EnumWindowsProc(HWND, LPARAM);
 };

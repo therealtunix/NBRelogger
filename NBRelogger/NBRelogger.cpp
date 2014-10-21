@@ -31,6 +31,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		//	keepAlive = FALSE;
 		//}
 //		aProcess.isAlive() ? printf("yeaaah! still alive\n") : aProcess.startProcess();
+		if (x> 2 && x%10 == 0){
+			aProcess.~Process();
+		}
 		if (aProcess.isAlive() == FALSE)
 		{
 			printf("process is dead! :'( \n");

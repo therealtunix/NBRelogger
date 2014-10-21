@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string>
+//#include <afx.h>
+//#include <afxwin.h>
 
 using namespace std;
 
@@ -18,7 +20,49 @@ Process::Process(void){
 }
 
 Process::~Process(void){
-	return;
+	/* kills process and removes handles */
+
+	printf("----try to kill Process\n");
+
+	//send close request to window
+	//Top level window ID is the same as the Process ID
+	EnumWindows(EnumWindowsProc, pi.dwProcessId);
+	//wait for process to exit, when timeout is reached force close
+	//TODO handle the case if process did not close on forceclose
+	if (WAIT_OBJECT_0 != WaitForSingleObject(pi.hProcess, 15000))
+	{
+		printf("sendMessage did not work, try to forceclose\n");
+		TerminateProcess(pi.hProcess, NULL); //forceclose
+	}
+
+	// Close process and thread handles. 
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+}
+
+BOOL CALLBACK Process::EnumWindowsProc(HWND hwnd, LPARAM lParam)
+{
+	/* c&ß from http://www.codeproject.com/Articles/44/Creating-a-process-and-then-killing-it*/
+	DWORD wndPid;
+	// lParam = procInfo.dwProcessId;
+
+	// This gets the windows handle and pid of enumerated window.
+	GetWindowThreadProcessId(hwnd, &wndPid);
+
+	//  this makes sure that the PID matches that PID we started, and window
+	// text exists, before we kill it . I don't think this is really needed, 
+	// I included it because some apps have more than one window.
+	if (wndPid == (DWORD)lParam)
+	{
+		//  Please kindly close this process
+		::PostMessage(hwnd, WM_CLOSE, 0, 0);
+		return false;
+	}
+	else
+	{
+		// Keep enumerating
+		return true;
+	}
 }
 
 void Process::setPath(LPCWSTR s){
@@ -33,16 +77,16 @@ void Process::setArgs(LPTSTR s){
 		this->args = s;
 	}
 
-LPTSTR Process::getArgs(){
+LPTSTR Process::getArgs(void){
 		/* return set arguments for the process */
 		return this->args;
 	}
 
-int Process::getPID(){
+int Process::getPID(void){
 		return pi.dwProcessId;
 	}
 
-boolean Process::isAlive(){
+boolean Process::isAlive(void){
 		/* check if Process is still alive, if it is alive return TRUE, else FALSE
 		WaitForSingleObject checks if Proces is in signaled state
 		if WAIT_TIMEOUT is returned process is in nonsignaled state
@@ -56,7 +100,7 @@ boolean Process::isAlive(){
 		}
 	}
 
-void Process::startProcess(){
+void Process::startProcess(void){
 	printf("trying to start Process\n");
 	// Start the child process. 
 	if (!CreateProcess(path,   // No module name (use command line)
