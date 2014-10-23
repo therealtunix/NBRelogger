@@ -25,7 +25,6 @@ Process::~Process(void){
 	printf("----try to kill Process\n");
 
 	//send close request to window
-	//Top level window ID is the same as the Process ID
 	EnumWindows(EnumWindowsProc, pi.dwProcessId);
 	//wait for process to exit, when timeout is reached force close
 	//TODO handle the case if process did not close on forceclose
@@ -42,7 +41,7 @@ Process::~Process(void){
 
 BOOL CALLBACK Process::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
-	/* c&ß from http://www.codeproject.com/Articles/44/Creating-a-process-and-then-killing-it*/
+	/* c&P from http://www.codeproject.com/Articles/44/Creating-a-process-and-then-killing-it*/
 	DWORD wndPid;
 	// lParam = procInfo.dwProcessId;
 

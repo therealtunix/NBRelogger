@@ -1,4 +1,4 @@
-// NBRelogger.cpp : Definiert den Einstiegspunkt für die Konsolenanwendung.
+// NBRelogger.cpp : .
 //
 
 #include "stdafx.h"
